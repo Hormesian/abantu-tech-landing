@@ -12,10 +12,7 @@ export function ContactFooter() {
       <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-2xl border border-gold/40 bg-ink p-8 text-center shadow-2xl sm:p-12">
           {/* faint grid backdrop */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]"
-          />
+          <div aria-hidden="true" className="bg-grid-dark pointer-events-none absolute inset-0" />
           <div className="relative">
             <h2 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Ready to stabilize and scale your infrastructure?

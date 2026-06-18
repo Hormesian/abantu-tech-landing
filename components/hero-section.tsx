@@ -6,10 +6,7 @@ export function HeroSection() {
   return (
     <section id="top" className="relative overflow-hidden">
       {/* subtle background grid */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,oklch(0.9_0.008_250/0.6)_1px,transparent_1px),linear-gradient(to_bottom,oklch(0.9_0.008_250/0.6)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]"
-      />
+      <div aria-hidden="true" className="bg-grid-light pointer-events-none absolute inset-0" />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8 lg:py-24">
         <div>
