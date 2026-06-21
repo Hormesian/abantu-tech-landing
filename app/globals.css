@@ -133,42 +133,8 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    color-scheme: dark;
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
-  }
-}
+/* This site is permanently light-mode. The auto-dark media query is intentionally
+   omitted so OS dark-mode preference never overrides the brand canvas. */
 
 @layer base {
   * {
@@ -183,14 +149,15 @@
 }
 
 @layer utilities {
-  /* Light-theme grid: fine blueprint lines, fades out radially from the top */
+  /* Light-theme grid: hairline rules at 25% opacity — barely-there architectural
+     texture on the near-white canvas, top-fade so it dissolves toward the fold */
   .bg-grid-light {
     background-image:
-      linear-gradient(to right, oklch(0.9 0.008 250 / 0.6) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.9 0.008 250 / 0.6) 1px, transparent 1px);
-    background-size: 56px 56px;
-    -webkit-mask-image: radial-gradient(ellipse at top, black 30%, transparent 75%);
-    mask-image: radial-gradient(ellipse at top, black 30%, transparent 75%);
+      linear-gradient(to right, oklch(0.75 0.012 250 / 0.22) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.75 0.012 250 / 0.22) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse 120% 80% at 50% 0%, black 40%, transparent 80%);
+    mask-image: radial-gradient(ellipse 120% 80% at 50% 0%, black 40%, transparent 80%);
   }
 
   /* Dark-theme grid: subtle white hairlines for dark/ink-background panels */
