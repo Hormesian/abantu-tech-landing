@@ -5,36 +5,36 @@ const metrics = [
   {
     icon: Activity,
     value: "99.9%",
-    label: "Uptime Architecture",
-    copy: "High-availability configurations designed to eliminate single points of failure.",
+    label: "Fewer Outages",
+    copy: "Your systems stay up and running, so your business never grinds to a halt.",
     tone: "gold" as const,
   },
   {
     icon: ShieldCheck,
     value: "Zero-Trust",
-    label: "Security Models",
-    copy: "Network-level isolation, encrypted data pipelines, and robust access controls.",
+    label: "Safer Access",
+    copy: "Strict access controls keep the wrong people out, even as your team grows.",
     tone: "blue" as const,
   },
   {
     icon: Lock,
     value: "100%",
-    label: "Data Sovereignty",
-    copy: "Deployments structured so your corporate data never leaves your controlled infrastructure.",
+    label: "Data Under Your Control",
+    copy: "Your business information stays yours — never locked into a third-party platform.",
     tone: "gold" as const,
   },
 ]
 
 export function BenchmarksSection() {
   return (
-    <section id="benchmarks" className="scroll-mt-20">
+    <section id="benchmarks" aria-labelledby="benchmarks-heading" className="scroll-mt-20">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <FlankMotif tone="gold" className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-foreground">
-            Operational Benchmarks
+            Why Businesses Trust ATS
           </FlankMotif>
-          <h2 className="mt-5 text-balance text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-            Engineered to enterprise standards
+          <h2 id="benchmarks-heading" className="mt-5 text-balance text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            Built to keep your business running smoothly
           </h2>
         </div>
 

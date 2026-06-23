@@ -7,31 +7,34 @@ const models = [
     icon: Zap,
     tone: "gold" as const,
     title: "Project-Based Sprints",
+    outcome: "Best for: launching quickly with a fixed scope and timeline.",
     copy: "Best for discrete migrations, website front-end overhauls, or custom automation pipeline builds with a fixed scope.",
   },
   {
     icon: RefreshCw,
     tone: "blue" as const,
     title: "Retainer-Based Managed Services",
+    outcome: "Best for: keeping everything running, day to day.",
     copy: "Best for ongoing network administration, infrastructure monitoring, and continuous systems optimization.",
   },
   {
     icon: Compass,
     tone: "gold" as const,
     title: "Dedicated Technical Advisory",
+    outcome: "Best for: ongoing support as you plan your next stage of growth.",
     copy: "Best for long-term digital transformation planning, compliance audits, and custom systems architecture design.",
   },
 ]
 
 export function EngagementModels() {
   return (
-    <section id="engagement" className="scroll-mt-20 border-y border-border bg-secondary/40">
+    <section id="engagement" aria-labelledby="engagement-heading" className="scroll-mt-20 border-y border-border bg-secondary/40">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <FlankMotif tone="blue" className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue">
             Engagement Models
           </FlankMotif>
-          <h2 className="mt-5 text-balance text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+          <h2 id="engagement-heading" className="mt-5 text-balance text-3xl font-bold tracking-tight text-ink sm:text-4xl">
             Partner with us on your terms
           </h2>
         </div>
@@ -61,11 +64,20 @@ export function EngagementModels() {
                 >
                   {model.title}
                 </h3>
+                <p
+                  className={cn(
+                    "mt-2 text-sm font-medium",
+                    isGold ? "text-gold-foreground" : "text-brand-blue",
+                  )}
+                >
+                  {model.outcome}
+                </p>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{model.copy}</p>
                 <a
                   href="#contact"
+                  aria-label={`Discuss the ${model.title} engagement model`}
                   className={cn(
-                    "mt-6 inline-flex items-center gap-1.5 text-sm font-semibold",
+                    "mt-6 inline-flex items-center gap-1.5 rounded-md text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
                     isGold ? "text-gold-foreground hover:text-gold" : "text-brand-blue hover:text-brand-blue-dark",
                   )}
                 >
