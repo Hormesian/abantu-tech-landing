@@ -4,6 +4,7 @@ import { ServiceMatrix } from "@/components/service-matrix"
 import { BenchmarksSection } from "@/components/benchmarks-section"
 import { EngagementModels } from "@/components/engagement-models"
 import { ContactFooter } from "@/components/contact-footer"
+import { AtsLeadModal } from "@/components/ats-lead-modal"
 
 export default function Page() {
   return (
@@ -22,6 +23,7 @@ export default function Page() {
         <EngagementModels />
         <ContactFooter />
       </main>
+      <AtsLeadModal />
     </>
   )
 }

@@ -3,16 +3,18 @@
 import Image from "next/image"
 import { useState } from "react"
 import { Menu, X, ArrowUpRight } from "lucide-react"
+import { useAtsLeadModal } from "@/components/ats-lead-modal"
 
 const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Our Approach", href: "#benchmarks" },
   { label: "Engagement Models", href: "#engagement" },
-  { label: "About", href: "#about" },
+  { label: "About", href: "https://go.abantutech.co.ke/about/" },
 ]
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
+  const { openModal } = useAtsLeadModal()
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/80 bg-background/85 backdrop-blur-md">
@@ -53,13 +55,14 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href="#contact"
+          <button
+            type="button"
+            onClick={openModal}
             className="hidden items-center gap-2 rounded-md border border-gold bg-brand-blue px-4 py-2.5 text-sm font-semibold text-brand-blue-foreground shadow-sm transition-colors hover:bg-brand-blue-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:inline-flex"
           >
             Book a discovery call
             <ArrowUpRight className="size-4 text-gold" />
-          </a>
+          </button>
 
           <button
             type="button"
@@ -89,14 +92,17 @@ export function SiteHeader() {
               </li>
             ))}
             <li className="pt-2">
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false)
+                  openModal()
+                }}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-gold bg-brand-blue px-4 py-2.5 text-sm font-semibold text-brand-blue-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
               >
-                Request Infrastructure Audit
+                Book a discovery call
                 <ArrowUpRight className="size-4 text-gold" />
-              </a>
+              </button>
             </li>
           </ul>
         </nav>

@@ -14,6 +14,9 @@
   --color-brand-blue: var(--brand-blue);
   --color-brand-blue-dark: var(--brand-blue-dark);
   --color-brand-blue-foreground: var(--brand-blue-foreground);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-purple-dark: var(--brand-purple-dark);
+  --color-brand-purple-foreground: var(--brand-purple-foreground);
   --color-ink: var(--ink);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -81,6 +84,9 @@
   --brand-blue: oklch(0.44 0.18 250);
   --brand-blue-dark: oklch(0.36 0.16 252);
   --brand-blue-foreground: oklch(0.99 0 0);
+  --brand-purple: oklch(0.44 0.18 305);
+  --brand-purple-dark: oklch(0.36 0.16 305);
+  --brand-purple-foreground: oklch(0.99 0 0);
   --ink: oklch(0.21 0.02 256);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
