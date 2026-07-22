@@ -34,6 +34,7 @@ export function AtsLeadModal() {
   const [nameError, setNameError] = useState(false)
   const [phoneError, setPhoneError] = useState(false)
   const [serviceError, setServiceError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
 
@@ -46,6 +47,7 @@ export function AtsLeadModal() {
       setNameError(false)
       setPhoneError(false)
       setServiceError(false)
+      setEmailError(false)
       setIsSubmitting(false)
       setSubmitError(null)
     }, 200)
@@ -84,22 +86,29 @@ export function AtsLeadModal() {
       if (key === "name") setNameError(false)
       if (key === "phone") setPhoneError(false)
       if (key === "service") setServiceError(false)
+      if (key === "email") setEmailError(false)
     }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
     let valid = true
-    if (!formData.name.trim()) {
+    const trimmedName = formData.name.trim()
+    if (!trimmedName || !/^[A-Za-z\s'-]+$/.test(trimmedName)) {
       setNameError(true)
       valid = false
     }
-    if (!formData.phone.trim()) {
+    const phoneDigits = formData.phone.replace(/\D/g, "")
+    if (phoneDigits.length !== 10) {
       setPhoneError(true)
       valid = false
     }
     if (!formData.service) {
       setServiceError(true)
+      valid = false
+    }
+    if (formData.email.trim() && !formData.email.includes("@")) {
+      setEmailError(true)
       valid = false
     }
     if (!valid) return
@@ -139,7 +148,6 @@ export function AtsLeadModal() {
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       style={{ backgroundColor: "rgba(10,8,6,0.85)" }}
-      onClick={closeModal}
       role="presentation"
     >
       <div
@@ -196,7 +204,7 @@ export function AtsLeadModal() {
                   htmlFor="ats-lead-name"
                   className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted-foreground"
                 >
-                  Name
+                  Name <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="ats-lead-name"
@@ -204,12 +212,16 @@ export function AtsLeadModal() {
                   value={formData.name}
                   onChange={updateField("name")}
                   aria-invalid={nameError}
+                  placeholder="Your Name"
+                  maxLength={25}
                   className={`w-full rounded-md border bg-white px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-gold ${
                     nameError ? "border-gold" : "border-border"
                   }`}
                 />
                 {nameError && (
-                  <p className="mt-1.5 text-xs font-medium text-gold-dark">Please enter your name</p>
+                  <p className="mt-1.5 text-xs font-medium text-gold-dark">
+                    Please enter a valid name (letters only)
+                  </p>
                 )}
               </div>
 
@@ -218,7 +230,7 @@ export function AtsLeadModal() {
                   htmlFor="ats-lead-phone"
                   className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted-foreground"
                 >
-                  Phone Number
+                  Phone Number <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="ats-lead-phone"
@@ -226,13 +238,14 @@ export function AtsLeadModal() {
                   value={formData.phone}
                   onChange={updateField("phone")}
                   aria-invalid={phoneError}
+                  placeholder="0700 000000"
                   className={`w-full rounded-md border bg-white px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-gold ${
                     phoneError ? "border-gold" : "border-border"
                   }`}
                 />
                 {phoneError && (
                   <p className="mt-1.5 text-xs font-medium text-gold-dark">
-                    Please enter your phone number
+                    Please enter a valid 10-digit phone number
                   </p>
                 )}
               </div>
@@ -242,7 +255,7 @@ export function AtsLeadModal() {
                   htmlFor="ats-lead-service"
                   className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted-foreground"
                 >
-                  Service
+                  Service <span className="text-red-500">*</span>
                 </label>
                 <select
                   id="ats-lead-service"
@@ -279,8 +292,18 @@ export function AtsLeadModal() {
                   type="email"
                   value={formData.email}
                   onChange={updateField("email")}
-                  className="w-full rounded-md border border-border bg-white px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-gold"
+                  aria-invalid={emailError}
+                  placeholder="you@example.com"
+                  maxLength={50}
+                  className={`w-full rounded-md border bg-white px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-gold ${
+                    emailError ? "border-gold" : "border-border"
+                  }`}
                 />
+                {emailError && (
+                  <p className="mt-1.5 text-xs font-medium text-gold-dark">
+                    Please enter a valid email address
+                  </p>
+                )}
               </div>
 
               {submitError && (

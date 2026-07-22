@@ -16,6 +16,11 @@ const toneStyles = {
     text: "text-gold-foreground",
     check: "text-gold",
     ctaBorder: "border-gold/40",
+    hoverBorder: "hover:border-gold focus-visible:border-gold",
+    hoverFill: "bg-gold",
+    hoverTrackBg: "group-hover:bg-gold-foreground/40 group-focus-visible:bg-gold-foreground/40",
+    hoverText: "group-hover:text-gold-foreground group-focus-visible:text-gold-foreground",
+    hoverArrowBorder: "group-hover:border-gold-foreground group-focus-visible:border-gold-foreground",
   },
   blue: {
     bar: "bg-brand-blue",
@@ -23,6 +28,11 @@ const toneStyles = {
     text: "text-brand-blue",
     check: "text-brand-blue",
     ctaBorder: "border-brand-blue/30",
+    hoverBorder: "hover:border-brand-blue focus-visible:border-brand-blue",
+    hoverFill: "bg-brand-blue",
+    hoverTrackBg: "group-hover:bg-brand-blue-foreground/40 group-focus-visible:bg-brand-blue-foreground/40",
+    hoverText: "group-hover:text-brand-blue-foreground group-focus-visible:text-brand-blue-foreground",
+    hoverArrowBorder: "group-hover:border-brand-blue-foreground group-focus-visible:border-brand-blue-foreground",
   },
   purple: {
     bar: "bg-brand-purple",
@@ -30,6 +40,11 @@ const toneStyles = {
     text: "text-brand-purple",
     check: "text-brand-purple",
     ctaBorder: "border-brand-purple/30",
+    hoverBorder: "hover:border-brand-purple focus-visible:border-brand-purple",
+    hoverFill: "bg-brand-purple",
+    hoverTrackBg: "group-hover:bg-brand-purple-foreground/40 group-focus-visible:bg-brand-purple-foreground/40",
+    hoverText: "group-hover:text-brand-purple-foreground group-focus-visible:text-brand-purple-foreground",
+    hoverArrowBorder: "group-hover:border-brand-purple-foreground group-focus-visible:border-brand-purple-foreground",
   },
 } as const
 
@@ -120,7 +135,7 @@ export function ServiceMatrix() {
 
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{phase.copy}</p>
 
-                  <ul className="mt-6 space-y-2.5 border-t border-border pt-5">
+                  <ul className="mt-6 flex-1 space-y-2.5 border-t border-border pt-5">
                     {phase.bullets.map((bullet) => (
                       <li key={bullet} className="flex items-start gap-2.5 text-sm text-foreground/90">
                         <Check className={cn("mt-0.5 size-4 shrink-0", styles.check)} aria-hidden="true" />
@@ -135,25 +150,32 @@ export function ServiceMatrix() {
                     className={cn(
                       "group relative mt-6 flex h-14 items-center justify-center overflow-hidden rounded-full border text-sm font-semibold transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
                       styles.ctaBorder,
-                      "hover:border-brand-blue focus-visible:border-brand-blue",
+                      styles.hoverBorder,
                     )}
                   >
                     {/* fill that reveals on hover/focus, standing in for ELEKS's photo+mask */}
                     <span
                       aria-hidden="true"
-                      className="absolute inset-0 bg-brand-blue opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
+                      className={cn(
+                        "absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100",
+                        styles.hoverFill,
+                      )}
                     />
 
                     {/* track line the arrow travels along */}
                     <span
                       aria-hidden="true"
-                      className="absolute left-1/2 h-px w-3/4 -translate-x-1/2 bg-border transition-colors duration-300 group-hover:bg-brand-blue-foreground/40 group-focus-visible:bg-brand-blue-foreground/40"
+                      className={cn(
+                        "absolute left-1/2 h-px w-3/4 -translate-x-1/2 bg-border transition-colors duration-300",
+                        styles.hoverTrackBg,
+                      )}
                     />
 
                     {/* label — always visible, just recolours on hover/focus */}
                     <span
                       className={cn(
-                        "relative z-10 transition-colors duration-300 group-hover:text-brand-blue-foreground group-focus-visible:text-brand-blue-foreground",
+                        "relative z-10 transition-colors duration-300",
+                        styles.hoverText,
                         styles.text,
                       )}
                     >
@@ -164,13 +186,15 @@ export function ServiceMatrix() {
                     <span
                       aria-hidden="true"
                       className={cn(
-                        "absolute left-[10%] top-1/2 z-10 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border bg-card transition-[left,background-color,border-color] duration-500 ease-out group-hover:left-[calc(90%-1rem)] group-hover:border-brand-blue-foreground group-hover:bg-transparent group-focus-visible:left-[calc(90%-1rem)] group-focus-visible:border-brand-blue-foreground group-focus-visible:bg-transparent",
+                        "absolute left-[10%] top-1/2 z-10 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border bg-card transition-[left,background-color,border-color] duration-500 ease-out group-hover:left-[calc(90%-1rem)] group-hover:bg-transparent group-focus-visible:left-[calc(90%-1rem)] group-focus-visible:bg-transparent",
+                        styles.hoverArrowBorder,
                         styles.ctaBorder,
                       )}
                     >
                       <ArrowRight
                         className={cn(
-                          "size-4 transition-colors duration-300 group-hover:text-brand-blue-foreground group-focus-visible:text-brand-blue-foreground",
+                          "size-4 transition-colors duration-300",
+                          styles.hoverText,
                           styles.text,
                         )}
                       />
