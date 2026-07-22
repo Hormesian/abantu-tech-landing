@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Our Approach", href: "#benchmarks" },
   { label: "Engagement Models", href: "#engagement" },
-  { label: "About", href: "https://abantutech.co.ke/about/" },
+  { label: "About", href: "https://go.abantutech.co.ke/about/" },
 ]
 
 export function SiteHeader() {

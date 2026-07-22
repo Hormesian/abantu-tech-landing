@@ -2,11 +2,6 @@ import { TrendingUp, Settings2, Brain, Check, ArrowRight, ShieldCheck } from "lu
 import { FlankMotif } from "@/components/flank-motif"
 import { cn } from "@/lib/utils"
 
-// Flat link to the WP Services page for all three card CTAs (no per-card anchors — walked back per Richard).
-// Currently /services_new/ (staging URL during WP realignment) — switch to /services/ once that work goes live
-// and replaces the current live post.
-const SERVICES_URL = "https://abantutech.co.ke/services_new/"
-
 // Tone-keyed style lookup — replaces the old two-state isGold boolean now that a third
 // (purple) tone exists. Each tone supplies every className fragment the card needs.
 const toneStyles = {
@@ -54,6 +49,7 @@ const phases = [
     tone: "gold" as const,
     eyebrow: "GROWTH",
     title: "Lead Growth Platform",
+    url: "https://go.abantutech.co.ke/growth/",
     copy: "Grow revenue with intelligent lead capture and engagement.",
     bullets: [
       "Always-on lead capture",
@@ -66,6 +62,7 @@ const phases = [
     tone: "blue" as const,
     eyebrow: "OPERATIONS",
     title: "Operations Intelligence Platform",
+    url: "https://go.abantutech.co.ke/operations/",
     copy: "Reduce operational friction with AI-powered business assistance.",
     bullets: [
       "Draft quotations in minutes",
@@ -79,6 +76,7 @@ const phases = [
     tone: "purple" as const,
     eyebrow: "TRANSFORMATION",
     title: "Business AI Operating System",
+    url: "https://go.abantutech.co.ke/transformation/",
     copy: "Build an AI-native organization with enterprise intelligence and autonomous operations.",
     bullets: [
       "Handles higher volume with ease",
@@ -145,7 +143,7 @@ export function ServiceMatrix() {
                   </ul>
 
                   <a
-                    href={SERVICES_URL}
+                    href={phase.url}
                     aria-label={`Explore ${phase.title}`}
                     className={cn(
                       "group relative mt-6 flex h-14 items-center justify-center overflow-hidden rounded-full border text-sm font-semibold transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
