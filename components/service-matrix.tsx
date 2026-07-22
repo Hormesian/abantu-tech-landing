@@ -1,34 +1,76 @@
-import { Inbox, Workflow, Rocket, Check, ArrowRight } from "lucide-react"
+import { TrendingUp, Settings2, Brain, Check, ArrowRight, ShieldCheck } from "lucide-react"
 import { FlankMotif } from "@/components/flank-motif"
 import { cn } from "@/lib/utils"
 
+// Flat link to the WP Services page for all three card CTAs (no per-card anchors — walked back per Richard).
+// Currently /services_new/ (staging URL during WP realignment) — switch to /services/ once that work goes live
+// and replaces the current live post.
+const SERVICES_URL = "https://abantutech.co.ke/services_new/"
+
+// Tone-keyed style lookup — replaces the old two-state isGold boolean now that a third
+// (purple) tone exists. Each tone supplies every className fragment the card needs.
+const toneStyles = {
+  gold: {
+    bar: "bg-gold",
+    chip: "border-gold/40 bg-gold/10 text-gold-foreground",
+    text: "text-gold-foreground",
+    check: "text-gold",
+    ctaBorder: "border-gold/40",
+  },
+  blue: {
+    bar: "bg-brand-blue",
+    chip: "border-brand-blue/30 bg-brand-blue/10 text-brand-blue",
+    text: "text-brand-blue",
+    check: "text-brand-blue",
+    ctaBorder: "border-brand-blue/30",
+  },
+  purple: {
+    bar: "bg-brand-purple",
+    chip: "border-brand-purple/30 bg-brand-purple/10 text-brand-purple",
+    text: "text-brand-purple",
+    check: "text-brand-purple",
+    ctaBorder: "border-brand-purple/30",
+  },
+} as const
+
 const phases = [
   {
-    icon: Inbox,
+    icon: TrendingUp,
     tone: "gold" as const,
-    phaseLabel: "Phase 1",
-    title: "Capture more leads, respond faster",
-    productName: "Website + Lead Concierge",
-    copy: "Stop losing leads to slow replies and scattered communication across WhatsApp, email, and calls.",
-    bullets: ["Always-on lead capture", "Faster first response", "One place for every enquiry"],
+    eyebrow: "GROWTH",
+    title: "Lead Growth Platform",
+    copy: "Grow revenue with intelligent lead capture and engagement.",
+    bullets: [
+      "Always-on lead capture",
+      "AI-powered lead qualification",
+      "Faster responses across WhatsApp, email, and calls",
+    ],
   },
   {
-    icon: Workflow,
+    icon: Settings2,
     tone: "blue" as const,
-    phaseLabel: "Phase 2",
-    title: "Save time, reduce admin",
-    productName: "ATS AI Box Tier 1",
-    copy: "Your team gets help drafting quotations, following up on leads, and finding business information faster — without losing in-house control.",
-    bullets: ["Draft quotations in minutes", "Automatic lead follow-up", "Instant access to business knowledge"],
+    eyebrow: "OPERATIONS",
+    title: "Operations Intelligence Platform",
+    copy: "Reduce operational friction with AI-powered business assistance.",
+    bullets: [
+      "Draft quotations in minutes",
+      "Automate follow-ups and tasks",
+      "Instant access to business knowledge",
+      "Improve team productivity",
+    ],
   },
   {
-    icon: Rocket,
-    tone: "gold" as const,
-    phaseLabel: "Phase 3",
-    title: "Scale into a stronger AI operating layer",
-    productName: "ATS AI Box Tier 2",
-    copy: "Built for growing teams that need more capacity, more automation, and broader local intelligence.",
-    bullets: ["Handles higher volume", "Deeper automation across teams", "Broader local AI capability"],
+    icon: Brain,
+    tone: "purple" as const,
+    eyebrow: "TRANSFORMATION",
+    title: "Business AI Operating System",
+    copy: "Build an AI-native organization with enterprise intelligence and autonomous operations.",
+    bullets: [
+      "Handles higher volume with ease",
+      "Deep automation across departments",
+      "Sovereign AI with full data ownership",
+      "Enterprise-grade intelligence layer",
+    ],
   },
 ]
 
@@ -49,120 +91,119 @@ export function ServiceMatrix() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {phases.map((phase) => {
-            const Icon = phase.icon
-            const isGold = phase.tone === "gold"
-            return (
-              <article
-                key={phase.phaseLabel}
-                className="group relative flex flex-col rounded-xl border border-border bg-card p-7 shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-md"
-              >
-                <span
-                  aria-hidden="true"
-                  className={cn(
-                    "absolute inset-x-0 top-0 h-1 rounded-t-xl",
-                    isGold ? "bg-gold" : "bg-brand-blue",
-                  )}
-                />
-                <div className="flex items-center justify-between gap-3">
-                  <span
-                    className={cn(
-                      "inline-flex size-12 items-center justify-center rounded-lg border",
-                      isGold
-                        ? "border-gold/40 bg-gold/10 text-gold-foreground"
-                        : "border-brand-blue/30 bg-brand-blue/10 text-brand-blue",
-                    )}
-                  >
-                    <Icon className="size-6" aria-hidden="true" />
-                  </span>
-                  <span
-                    className={cn(
-                      "text-xs font-semibold uppercase tracking-[0.14em]",
-                      isGold ? "text-gold-foreground" : "text-brand-blue",
-                    )}
-                  >
-                    {phase.phaseLabel}
-                  </span>
-                </div>
-
-                <h3
-                  className={cn(
-                    "mt-5 text-lg font-semibold leading-snug",
-                    isGold ? "text-gold-foreground" : "text-brand-blue",
-                  )}
+        <div className="relative mt-14">
+          <div className="grid gap-6 lg:grid-cols-3">
+            {phases.map((phase) => {
+              const Icon = phase.icon
+              const styles = toneStyles[phase.tone]
+              return (
+                <article
+                  key={phase.title}
+                  className="group relative flex flex-col rounded-xl border border-border bg-card p-7 shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:border-gold/60 hover:shadow-md"
                 >
-                  {phase.title}
-                </h3>
-                <p className="mt-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  {phase.productName}
-                </p>
-
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{phase.copy}</p>
-
-                <ul className="mt-6 space-y-2.5 border-t border-border pt-5">
-                  {phase.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-start gap-2.5 text-sm text-foreground/90">
-                      <Check
-                        className={cn("mt-0.5 size-4 shrink-0", isGold ? "text-gold" : "text-brand-blue")}
-                        aria-hidden="true"
-                      />
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="#contact"
-                  aria-label={`Talk through ${phase.phaseLabel}: ${phase.productName}`}
-                  className={cn(
-                    "group relative mt-6 flex h-14 items-center justify-center overflow-hidden rounded-full border text-sm font-semibold transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
-                    isGold
-                      ? "border-gold/40 hover:border-brand-blue focus-visible:border-brand-blue"
-                      : "border-brand-blue/30 hover:border-brand-blue focus-visible:border-brand-blue",
-                  )}
-                >
-                  {/* fill that reveals on hover/focus, standing in for ELEKS's photo+mask */}
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-brand-blue opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
-                  />
-
-                  {/* track line the arrow travels along */}
-                  <span
-                    aria-hidden="true"
-                    className="absolute left-1/2 h-px w-3/4 -translate-x-1/2 bg-border transition-colors duration-300 group-hover:bg-brand-blue-foreground/40 group-focus-visible:bg-brand-blue-foreground/40"
-                  />
-
-                  {/* label — always visible, just recolours on hover/focus */}
-                  <span
-                    className={cn(
-                      "relative z-10 transition-colors duration-300 group-hover:text-brand-blue-foreground group-focus-visible:text-brand-blue-foreground",
-                      isGold ? "text-gold-foreground" : "text-brand-blue",
-                    )}
-                  >
-                    Talk through this phase
-                  </span>
-
-                  {/* arrow circle sliding left to right along the rail */}
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute left-[10%] top-1/2 z-10 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border bg-card transition-[left,background-color,border-color] duration-500 ease-out group-hover:left-[calc(90%-1rem)] group-hover:border-brand-blue-foreground group-hover:bg-transparent group-focus-visible:left-[calc(90%-1rem)] group-focus-visible:border-brand-blue-foreground group-focus-visible:bg-transparent",
-                      isGold ? "border-gold/40" : "border-brand-blue/30",
-                    )}
-                  >
-                    <ArrowRight
+                  <span aria-hidden="true" className={cn("absolute inset-x-0 top-0 h-1 rounded-t-xl", styles.bar)} />
+                  <div className="flex items-center justify-between gap-3">
+                    <span
                       className={cn(
-                        "size-4 transition-colors duration-300 group-hover:text-brand-blue-foreground group-focus-visible:text-brand-blue-foreground",
-                        isGold ? "text-gold-foreground" : "text-brand-blue",
+                        "inline-flex size-12 items-center justify-center rounded-lg border",
+                        styles.chip,
                       )}
+                    >
+                      <Icon className="size-6" aria-hidden="true" />
+                    </span>
+                    <span className={cn("text-xs font-semibold uppercase tracking-[0.14em]", styles.text)}>
+                      {phase.eyebrow}
+                    </span>
+                  </div>
+
+                  <h3 className={cn("mt-5 text-lg font-semibold leading-snug", styles.text)}>{phase.title}</h3>
+
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{phase.copy}</p>
+
+                  <ul className="mt-6 space-y-2.5 border-t border-border pt-5">
+                    {phase.bullets.map((bullet) => (
+                      <li key={bullet} className="flex items-start gap-2.5 text-sm text-foreground/90">
+                        <Check className={cn("mt-0.5 size-4 shrink-0", styles.check)} aria-hidden="true" />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href={SERVICES_URL}
+                    aria-label={`Explore ${phase.title}`}
+                    className={cn(
+                      "group relative mt-6 flex h-14 items-center justify-center overflow-hidden rounded-full border text-sm font-semibold transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+                      styles.ctaBorder,
+                      "hover:border-brand-blue focus-visible:border-brand-blue",
+                    )}
+                  >
+                    {/* fill that reveals on hover/focus, standing in for ELEKS's photo+mask */}
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-brand-blue opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
                     />
-                  </span>
-                </a>
-              </article>
-            )
-          })}
+
+                    {/* track line the arrow travels along */}
+                    <span
+                      aria-hidden="true"
+                      className="absolute left-1/2 h-px w-3/4 -translate-x-1/2 bg-border transition-colors duration-300 group-hover:bg-brand-blue-foreground/40 group-focus-visible:bg-brand-blue-foreground/40"
+                    />
+
+                    {/* label — always visible, just recolours on hover/focus */}
+                    <span
+                      className={cn(
+                        "relative z-10 transition-colors duration-300 group-hover:text-brand-blue-foreground group-focus-visible:text-brand-blue-foreground",
+                        styles.text,
+                      )}
+                    >
+                      Explore this platform
+                    </span>
+
+                    {/* arrow circle sliding left to right along the rail */}
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "absolute left-[10%] top-1/2 z-10 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border bg-card transition-[left,background-color,border-color] duration-500 ease-out group-hover:left-[calc(90%-1rem)] group-hover:border-brand-blue-foreground group-hover:bg-transparent group-focus-visible:left-[calc(90%-1rem)] group-focus-visible:border-brand-blue-foreground group-focus-visible:bg-transparent",
+                        styles.ctaBorder,
+                      )}
+                    >
+                      <ArrowRight
+                        className={cn(
+                          "size-4 transition-colors duration-300 group-hover:text-brand-blue-foreground group-focus-visible:text-brand-blue-foreground",
+                          styles.text,
+                        )}
+                      />
+                    </span>
+                  </a>
+                </article>
+              )
+            })}
+          </div>
+
+          {/* Connector arrows between adjacent cards — decorative only, lg+ (three-column) layout only.
+              Positioned level with the icon-badge/eyebrow row near the top of the cards, not the card's
+              vertical centre. Neutral gray regardless of which tones they sit between. */}
+          <div className="pointer-events-none absolute inset-0 hidden lg:block" aria-hidden="true">
+            <span className="absolute left-1/3 top-14 flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card shadow-sm">
+              <ArrowRight className="size-5 text-muted-foreground" />
+            </span>
+            <span className="absolute left-2/3 top-14 flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card shadow-sm">
+              <ArrowRight className="size-5 text-muted-foreground" />
+            </span>
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col items-center text-center sm:mt-16">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="size-5 shrink-0 text-brand-blue" aria-hidden="true" />
+            <p className="text-base font-semibold text-ink sm:text-lg">
+              Built locally. Owned by you. Designed for growth.
+            </p>
+          </div>
+          <p className="mt-2 text-sm font-normal text-muted-foreground">
+            From first lead to full-scale transformation — we grow with you.
+          </p>
         </div>
       </div>
     </section>

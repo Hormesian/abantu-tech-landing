@@ -1,8 +1,13 @@
+"use client"
+
 import Image from "next/image"
 import { ArrowRight, ShieldCheck, Clock, MessageSquare } from "lucide-react"
 import { FlankMotif } from "@/components/flank-motif"
+import { useAtsLeadModal } from "@/components/ats-lead-modal"
 
 export function HeroSection() {
+  const { openModal } = useAtsLeadModal()
+
   return (
     <section id="top" aria-labelledby="hero-heading" className="relative overflow-hidden">
       {/* subtle background grid */}
@@ -25,13 +30,14 @@ export function HeroSection() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="#contact"
+            <button
+              type="button"
+              onClick={openModal}
               className="inline-flex items-center justify-center gap-2 rounded-md border border-gold bg-brand-blue px-6 py-3.5 text-sm font-semibold text-brand-blue-foreground shadow-sm transition-colors hover:bg-brand-blue-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             >
               Book a discovery call
               <ArrowRight className="size-4 text-gold" />
-            </a>
+            </button>
             <a
               href="#services"
               className="inline-flex items-center justify-center gap-2 rounded-md border border-gold bg-transparent px-6 py-3.5 text-sm font-semibold text-gold-foreground transition-colors hover:bg-gold/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"

@@ -1,11 +1,11 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
-import { ArrowUpRight, MapPin, CheckCircle2, MessageCircle } from "lucide-react"
+import { ArrowUpRight, MapPin, MessageCircle } from "lucide-react"
+import { useAtsLeadModal } from "@/components/ats-lead-modal"
 
 export function ContactFooter() {
-  const [submitted, setSubmitted] = useState(false)
+  const { openModal } = useAtsLeadModal()
 
   return (
     <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-20 bg-background">
@@ -18,41 +18,19 @@ export function ContactFooter() {
               Ready to save time and close more leads?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-pretty text-sm leading-relaxed text-white/70">
-              Share your email and we&apos;ll book a short discovery call to map out your growth path.
+              Tell us about your business and we&apos;ll book a short discovery call to map out your growth path.
             </p>
 
-            {submitted ? (
-              <div className="mx-auto mt-8 flex max-w-md items-center justify-center gap-3 rounded-md border border-gold/40 bg-white/5 px-5 py-4 text-sm font-medium text-white">
-                <CheckCircle2 className="size-5 text-gold" aria-hidden="true" />
-                Thanks — we&apos;ll be in touch shortly to schedule your call.
-              </div>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  setSubmitted(true)
-                }}
-                className="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row"
+            <div className="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
+              <button
+                type="button"
+                onClick={openModal}
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md border border-gold bg-brand-blue px-5 py-3 text-sm font-semibold text-brand-blue-foreground transition-colors hover:bg-brand-blue-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
               >
-                <label htmlFor="corporate-email" className="sr-only">
-                  Work email address
-                </label>
-                <input
-                  id="corporate-email"
-                  type="email"
-                  required
-                  placeholder="Work email address"
-                  className="w-full rounded-md border border-gold/50 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/40"
-                />
-                <button
-                  type="submit"
-                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md border border-gold bg-brand-blue px-5 py-3 text-sm font-semibold text-brand-blue-foreground transition-colors hover:bg-brand-blue-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-                >
-                  Book a discovery call
-                  <ArrowUpRight className="size-4 text-gold" />
-                </button>
-              </form>
-            )}
+                Book a discovery call
+                <ArrowUpRight className="size-4 text-gold" />
+              </button>
+            </div>
 
             <div className="mx-auto mt-4 max-w-md">
               <a
