@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     'Abantu Tech Solutions helps Kenyan SMEs turn their website into a lead engine, then adds a local AI assistant to follow up, quote, and find business information faster — without losing control of their data. Nairobi & Kisii, Kenya.',
   generator: 'v0.app',
-  metadataBase: new URL('https://www.abantutech.co.ke'),
+  metadataBase: new URL('https://abantutech.co.ke'),
   alternates: {
     canonical: '/',
   },
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     title: 'Abantu Tech Solutions | Save Time, Close More Leads, Stay in Control',
     description:
       'Abantu Tech Solutions helps Kenyan SMEs turn their website into a lead engine, then adds a local AI assistant to follow up, quote, and find business information faster — without losing control of their data. Nairobi & Kisii, Kenya.',
-    url: 'https://www.abantutech.co.ke',
+    url: 'https://abantutech.co.ke',
     siteName: 'Abantu Tech Solutions',
     images: [
       {
@@ -46,12 +46,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
+        url: '/icon-32x32.png',
       },
       {
         url: '/icon.svg',
@@ -72,7 +67,7 @@ const localBusinessJsonLd = {
   '@type': 'LocalBusiness',
   name: 'Abantu Tech Solutions',
   telephone: '+254740844520',
-  url: 'https://www.abantutech.co.ke',
+  url: 'https://abantutech.co.ke',
   address: {
     '@type': 'PostalAddress',
     postOfficeBoxNumber: 'P.O. Box 11476-00100',
